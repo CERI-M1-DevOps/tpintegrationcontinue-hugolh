@@ -269,19 +269,15 @@ void modifiePremierElementNonPresent() {
     listeATester.ajout(2);
     listeATester.ajout(3);
     
-    // Try modifying a non-existent element
     listeATester.modifiePremier(4, 5);
     
-    // Ensure the list remains unchanged
     assertEquals("ListeSimple(Noeud(3), Noeud(2), Noeud(1))", listeATester.toString());
 }
 
 @Test
 void modifiePremierSurListeVide() {
-    // Try modifying an element in an empty list
     listeATester.modifiePremier(1, 2);
     
-    // Ensure the list is still empty
     assertNull(listeATester.tete);
     assertEquals(0, listeATester.getSize());
 }
@@ -292,14 +288,71 @@ void modifiePremierPremierElement() {
     listeATester.ajout(2);
     listeATester.ajout(3);
     
-    // Modify the first element
     listeATester.modifiePremier(1, 10);
     
-    // Check that the first element is modified
     assertEquals("ListeSimple(Noeud(3), Noeud(2), Noeud(10))", listeATester.toString());
     assertEquals(3, listeATester.tete.getElement());
 }
 
+
+
+@Test
+void supprimePremierUniqueElement() {
+    listeATester.ajout(1);
+    listeATester.supprimePremier(1);
+    assertNull(listeATester.tete);
+}
+
+@Test
+void supprimePremierPlusieursOccurrences() {
+    listeATester.ajout(1);
+    listeATester.ajout(2);
+    listeATester.ajout(1);
+    listeATester.supprimePremier(1);
+    assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+}
+
+@Test
+void supprimePremierEnMilieu() {
+    listeATester.ajout(1);
+    listeATester.ajout(2);
+    listeATester.ajout(3);
+    listeATester.supprimePremier(2);
+    assertEquals("ListeSimple(Noeud(3), Noeud(1))", listeATester.toString());
+}
+
+
+
+@Test
+void supprimePremierElementNonPresent() {
+    listeATester.ajout(1);
+    listeATester.ajout(2);
+    listeATester.supprimePremier(3);
+    assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+}
+
+
+@Test
+void supprimePremierElementDernier() {
+    listeATester.ajout(1);
+    listeATester.ajout(2);
+    listeATester.ajout(3);
+    
+    listeATester.supprimePremier(3);
+    
+    assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+}
+
+@Test
+void supprimePremierMultipleOccurrences() {
+    listeATester.ajout(1);
+    listeATester.ajout(2);
+    listeATester.ajout(1);
+    
+    listeATester.supprimePremier(1);
+    
+    assertEquals("ListeSimple(Noeud(2), Noeud(1))", listeATester.toString());
+}
 
 
 
