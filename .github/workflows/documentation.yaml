@@ -1,0 +1,31 @@
+name: Generate and Deploy Java Documentation
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+  
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Generate Java Documentation
+        run: mvn -B javadoc:javadoc
+
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/apidocs
