@@ -251,4 +251,18 @@ import static org.junit.jupiter.api.Assertions.*;
         System.out.println(listeATester);
         assertEquals("ListeSimple(Noeud(4), Noeud(2), Noeud(3), Noeud(1), Noeud(5))", listeATester.toString());
     }
+
+    @Test
+    public void testEchangerSameNodes() {
+        listeATester.ajout(1);
+        
+        Noeud node = listeATester.tete;
+        String etatAvantEchange = listeATester.toString();
+    
+        listeATester.echanger(node, node); 
+    
+       assertEquals(etatAvantEchange, listeATester.toString());
+    }
+    
+
 }
