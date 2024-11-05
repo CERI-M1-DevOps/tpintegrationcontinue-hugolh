@@ -263,6 +263,44 @@ import static org.junit.jupiter.api.Assertions.*;
     
        assertEquals(etatAvantEchange, listeATester.toString());
     }
+    @Test
+void modifiePremierElementNonPresent() {
+    listeATester.ajout(1);
+    listeATester.ajout(2);
+    listeATester.ajout(3);
     
+    // Try modifying a non-existent element
+    listeATester.modifiePremier(4, 5);
+    
+    // Ensure the list remains unchanged
+    assertEquals("ListeSimple(Noeud(3), Noeud(2), Noeud(1))", listeATester.toString());
+}
+
+@Test
+void modifiePremierSurListeVide() {
+    // Try modifying an element in an empty list
+    listeATester.modifiePremier(1, 2);
+    
+    // Ensure the list is still empty
+    assertNull(listeATester.tete);
+    assertEquals(0, listeATester.getSize());
+}
+
+@Test
+void modifiePremierPremierElement() {
+    listeATester.ajout(1);
+    listeATester.ajout(2);
+    listeATester.ajout(3);
+    
+    // Modify the first element
+    listeATester.modifiePremier(1, 10);
+    
+    // Check that the first element is modified
+    assertEquals("ListeSimple(Noeud(3), Noeud(2), Noeud(10))", listeATester.toString());
+    assertEquals(3, listeATester.tete.getElement());
+}
+
+
+
 
 }
